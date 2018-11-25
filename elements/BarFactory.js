@@ -28,7 +28,7 @@ export default class BarFactory {
         for (let bar = 0; bar < tempBarArray.length; bar++) {
             let fieldArray = Array(9);
             for (let fpos = 0; fpos < fieldArray.length; fpos++) {
-                fieldArray[fpos] = barArray 
+                fieldArray[fpos] = barArray
                     ? barArray[fpos].getField(bar)
                     : new Field(i++);
             }

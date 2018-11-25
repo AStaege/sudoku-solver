@@ -7,7 +7,7 @@ window.onload = () => {
   console.log('initialize');
 
   let presetArray = [];
-  
+
   // 0
   presetArray.push([
 		[0,0,6,5,0,3,9,0,0],
@@ -20,7 +20,7 @@ window.onload = () => {
 		[0,0,8,0,0,0,2,0,0],
 		[0,0,1,6,0,2,8,0,0]
   ]);
-  
+
   // 1
   presetArray.push([
     [9,0,6,0,0,0,0,0,0],
@@ -46,7 +46,7 @@ window.onload = () => {
     [0,0,0,4,0,2,0,0,6],
     [0,8,0,0,0,0,0,0,2]
   ]);
-  
+
   // 3
   presetArray.push([
     [0,0,0,0,0,0,6,1,9],
@@ -126,5 +126,5 @@ window.onload = () => {
     }
   });
   console.log('initializing done');
- 
+
 };
