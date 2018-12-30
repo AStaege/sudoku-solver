@@ -44,22 +44,46 @@ export default class Quadrant {
         return this.id;
     }
 
+    checkForOnlyPossibleValue() {
+        let change = false;
+        let localChange;
+        do {
+            localChange = this.rows[0]
+                .concat(this.rows[1], this.rows[2])
+                .some(field => {
+                    const pV = field.getPossibleValues();
+                    if (pV.length == 1) {
+                        field.setValue(pV[0], true);
+                        return true;
+                    }
+                    return false;
+                });
+            change |= localChange;
+        } while (localChange);
+        return change;
+    }
+
     checkForSinglePossibleValues() {
         let change = false;
-        this.missingValues.forEach(mVal => {
-            let possibles = [];
-            this.rows.forEach(row => {
-                row.forEach(field => {
-                    if (field.getPossibleValues().indexOf(mVal) > -1) {
-                        possibles.push(field);
-                    }
+        let localChange;
+        do {
+            localChange = this.missingValues.some(mVal => {
+                let possibles = [];
+                this.rows.forEach(row => {
+                    row.forEach(field => {
+                        if (field.getPossibleValues().indexOf(mVal) > -1) {
+                            possibles.push(field);
+                        }
+                    });
                 });
+                if (possibles.length === 1) {
+                    possibles.pop().setValue(mVal, true);
+                    return true;
+                }
+                return false;
             });
-            if (possibles.length === 1) {
-                possibles.pop().setValue(mVal, true);
-                change = true;
-            }
-        });
+            change |= localChange;
+        } while (localChange);
         return change;
     }
 
@@ -70,13 +94,13 @@ export default class Quadrant {
                     .sort((a, b) => {
                         return a.val - b.val;
                     })
-                    .filter((elem, ind) => {console.log("elem: " + (elem.val + 1) + ", ind: " + ind); return elem.val != ind;});
+                    .filter((elem, ind) => elem.val !== ind);
         if (all.length > 0) {
-            console.log("found an error");
+            // console.log("found an error in quad " + this.id);
             all.forEach(el => {
                 // el.getTd().style.backgroundColor = 'red';
-                console.log(el.fld);
-                el.fld.getTd().style.backgroundColor = "red";
+                // console.log(el.fld);
+                el.fld.getTd().classList.add("quad-error");
             });
             return false;
         }

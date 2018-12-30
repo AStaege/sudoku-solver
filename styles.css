@@ -11,7 +11,7 @@ header p {
 
 section > div {
 	width: 60%;
-	margin: 0 auto 1em;
+	margin: 0 auto .5em;
 }
 
 section > div > table {
@@ -19,7 +19,7 @@ section > div > table {
 	border-collapse: collapse;
 }
 
-section > div >table td {
+section > div > table td {
 	text-align:center;
 	width:50px;
 	height:40px;
@@ -51,4 +51,28 @@ table td.fixed {
 #Validity.invalid {
 	color: red;
 	font-weight: bold;
+}
+button {
+	margin-right: 1rem;
+}
+td.row-error {
+	background-color: lightpink;
+}
+td.col-error {
+	background-color: lightgreen;
+}
+td.quad-error {
+	background-color: lightblue
+}
+td.row-error.col-error {
+	background-color: lightgoldenrodyellow;
+}
+td.col-error.quad-error {
+	background-color: mediumaquamarine;
+}
+td.quad-error.row-error {
+	background-color: mediumorchid;
+}
+td.row-error.col-error.quad-error {
+	background-color: dimgray;
 }

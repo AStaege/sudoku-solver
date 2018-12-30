@@ -58,8 +58,25 @@ export default class Bar {
         }
     }
 
+    checkForOnlyPossibleValue() {
+        let foundSomething = false;
+        let foundValue;
+        do {
+            foundValue = this.fields.some(field => {
+                const pV = field.getPossibleValues();
+                if (pV.length == 1) {
+                    field.setValue(pV[0], true);
+                    return true;
+                }
+                return false;
+            });
+            foundSomething |= foundValue;
+        } while (foundValue);
+        return foundSomething;
+    }
+
     checkForSinglePossibleValues() {
-        let change;
+        let change = false;
         let localChange;
         do {
             localChange = this.missingValues.some(mVal => {
@@ -88,15 +105,14 @@ export default class Bar {
                             return a.val - b.val;
                         })
                         .filter((elem, ind) => {
-                            console.log("elem: " + (elem.val + 1) + ", ind: " + ind);
+                            // console.log("elem: " + (elem.val + 1) + ", ind: " + ind);
                             return elem.val != ind;
                         });
         if (flds.length > 0) {
-            console.log("found an error");
+            // console.log("found an error");
             flds.forEach(el => {
-                // el.getTd().style.backgroundColor = 'red';
-                console.log(el.fld);
-                el.fld.getTd().style.backgroundColor = "red";
+                // console.log(el.fld);
+                el.fld.getTd().classList.add(this.bartype + "-error");
             });
             return false;
         }

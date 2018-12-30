@@ -44,38 +44,72 @@ export default class Playfield {
             });
         });
 
+        console.log("START SOLVING")
         do {
-            console.log(++counter);
+            // console.log("Big Round " + ++counter);
             let change;
             do {
+                // console.log("Small Round");
                 change = false;
                 if (checkrows) {
                     this.rowArray.forEach(row => {
+                        // console.log("Into row " + row.getId())
                         change |= row.checkForSinglePossibleValues();
+                        change |= row.checkForOnlyPossibleValue();
                     });
                 }
                 if (checkcols) {
                     this.colArray.forEach(col => {
+                        // console.log("Into col " + col.getId())
                         change |= col.checkForSinglePossibleValues();
+                        change |= col.checkForOnlyPossibleValue();
                     });
                 }
                 if (checkquads) {
                     this.quadrants.forEach(quad => {
+                        // console.log("Into quad " + quad.getId())
                         change |= quad.checkForSinglePossibleValues();
+                        change |= quad.checkForOnlyPossibleValue();
                     });
                 }
             } while (change);
 
+            
             foundBreak = this.rowArray.some(row => {
                 return row.getFields().some(field => {
                     const fval = field.getPossibleValues();
                     if (fval.length > 0) {
-                        field.setValue(fval[Math.floor(Math.random() * Math.floor(fval.length))], true);
+                        const indx = Math.floor(Math.random() * Math.floor(fval.length));
+                        console.log("--- INTO GUESS: pssbl: " + fval + " guess value " + fval[indx] + " (" + indx +") in r"+field.getRow().getId()+"c"+field.getCol().getId());
+                        field.setValue(fval[indx], true);
                         return true;
                     }
                     return false;
                 });
             });
+            
+            /*
+            foundBreak = false;
+            let remainingFields = [];
+            this.rowArray.forEach(row => {
+                row.getFields().forEach(field => {
+                    const fval = field.getPossibleValues();
+                    if (fval.length > 0) {
+                        remainingFields.push(field);
+                    }
+                });
+            });
+            const remFieldLength = remainingFields.length;
+            console.log("REMAINING FIELDS LENGTH: " + remFieldLength);
+            if (remFieldLength > 0) {
+                const fieldIndex = Math.floor(Math.random() * Math.floor(remFieldLength));
+                const fval = remainingFields[fieldIndex].getPossibleValues();
+                const indx = Math.floor(Math.random() * Math.floor(fval.length));
+                remainingFields[fieldIndex].setValue(fval[indx], true);
+                foundBreak = true;
+            }
+            */
+
         } while (foundBreak);
     }
 

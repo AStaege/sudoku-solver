@@ -9,11 +9,10 @@ export default class Field {
     }
 
     deletePossibleValue(value) {
+        // console.log("INTO DELETE (r" + this.getRow().getId() + "c" + this.getCol().getId() + "q" + this.quad.getId() + "), psb: " + this.possibleValues);
         if (this.possibleValues.length > 0 && this.possibleValues.indexOf(value) > -1) {
             this.possibleValues.splice(this.possibleValues.indexOf(value), 1);
-            if (this.possibleValues.length == 1) {
-                this.setValue(this.possibleValues, true);
-            }
+            // console.log("now psb: " + this.possibleValues);
         }
     }
 
@@ -26,6 +25,7 @@ export default class Field {
     }
 
     setValue(val, solving) {
+        // console.log("INTO FIELD r" + this.getRow().getId() + "c" + this.getCol().getId() + "q" + this.quad.getId() + ": val: " + val + ", thvalempty: " + (this.value === '') + ", pV: " + this.possibleValues);
         if (this.value === '') {
             this.value += val;
             this.td.textContent = val;
@@ -40,8 +40,11 @@ export default class Field {
     }
 
     updateEntities(value) {
+        // console.log("DeleteMissingValue ROW");
         this.row.deleteMissingValue(value);
+        // console.log("DeleteMissingValue COL");
         this.col.deleteMissingValue(value);
+        // console.log("DeleteMissingValue QUAD");
         this.quad.deleteMissingValue(value);
     }
 
@@ -54,6 +57,12 @@ export default class Field {
         this.td.dataset.tdId = this.col.getId();
     }
 
+    getRow() {
+        return this.row;
+    }
+    getCol() {
+        return this.col;
+    }
     getPossibleValues() {
         return this.possibleValues;
     }

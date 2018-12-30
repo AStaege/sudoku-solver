@@ -113,7 +113,7 @@ window.onload = () => {
   ]);
 
   const playfield = new Playfield();
-  playfield.loadGame(presetArray[5]);
+  playfield.loadGame(presetArray[0]);
   document.querySelector('.solve-button').addEventListener('click', function(evt) {
     playfield.solve();
   });
