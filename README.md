@@ -24,6 +24,7 @@ either:
 ]
 ```
 
+or
 ```javascript
 [
     '060010870',
