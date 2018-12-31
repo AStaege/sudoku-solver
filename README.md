@@ -9,7 +9,7 @@ it actually can try to solve it, but this may not come to an end.
 ## Playfield initializing format
 to import a playfield by now, there has to inserted (by push) a new array in ``sudoku.js`` of the format of one of the examples shown:
 
-either:
+#### either:
 ```javascript
 [
     [0,0,0,7,0,0,5,0,0],
@@ -24,7 +24,7 @@ either:
 ]
 ```
 
-or
+#### or
 ```javascript
 [
     '060010870',
