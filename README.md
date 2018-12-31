@@ -37,3 +37,10 @@ either:
     '800000051'
 ]
 ```
+
+## Principle
+in the fields it uses an array of ``possibleValues`` and in the row/col/quadrant it uses an array of ``missingValues``. For every set value from the initial playfield it deletes these values from these arrays.
+
+It then checks two conditions in a loop:
+1. it checks if one of the missing value of a row/col/quad is the possible value in only one field. If so, the value is set.
+2. it checks for every field if it has only one possible value left. If so, the value is set.
