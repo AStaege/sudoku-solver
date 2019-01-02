@@ -1,10 +1,10 @@
 # sudoku-solver
-Small working sudoku solver, with hardcoded playfield values
+Small working sudoku solver, with hardcoded playfield values, written in javascript fully client side.
 
 ## Playfields
-It has 8 Playfields in the main file ``sudoku.js`` where the playfield with index 5 is just a plain field (just for loading purposes)
+It has 8 Playfields in the main file ``sudoku.js`` where the playfield with index 5 is just a plain field (just for loading purposes).
 
-it actually can try to solve it, but this may not come to an end.
+The solver actually can try to solve the plain field, but this may not come to an end.
 
 ## Playfield initializing format
 to import a playfield by now, there has to inserted (by push) a new array in ``sudoku.js`` of the format of one of the examples shown:
@@ -45,3 +45,7 @@ in the fields it uses an array of ``possibleValues`` and in the row/col/quadrant
 It then checks two conditions in a loop:
 1. it checks if one of the missing value of a row/col/quad is the possible value in only one field. If so, the value is set.
 2. it checks for every field if it has only one possible value left. If so, the value is set.
+
+## TODO
+Next step is to develop the possibility to rewind steps, if come to a point, were it can't be solved. This is mostly important for the plain field variant, considering that an ordinary sudoku may have only one solution by rule.
+Inserting values into the html table will follow soon, also an uploading function for json and/or headless csv files.
